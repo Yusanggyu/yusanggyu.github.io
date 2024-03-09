@@ -1,0 +1,99 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.quiz-header {
+    margin-bottom: 20px;
+}
+
+.quiz-container {
+    font-size: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 35%;
+    height: auto; /* 자동 높이 조정 */
+    text-align: center;
+}
+
+.quiz-description {
+    margin-bottom: 20px;
+}
+
+.start-btn {
+    margin-top: 20px; /* 버튼 위 여백 추가 */
+    display: block;
+    margin: 0 auto;
+    background-color: #2286eb; /* 버튼 색상 변경 */
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.start-btn:hover {
+    background-color: #0052a3;
+}
+
+.result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option {
+    transition: background-color 0.3s ease;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #179717;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.restart-btn,
+.retry-btn {
+    background-color: #275ef7;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 5px;
+}
+
+.restart-btn:hover {
+    background-color: #dd1818;
+}
+.retry-btn:hover {
+    background-color: #1db61d;
+}
