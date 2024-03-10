@@ -97,3 +97,23 @@ body {
 .retry-btn:hover {
     background-color: #1db61d;
 }
+
+.next-question-btn,
+.show-result-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #8a2be2; /* 보라색 */
+    color: #fff; /* 흰색 폰트 */
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px; /* 조금만 둥글게 */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.next-question-btn:hover,
+.show-result-btn:hover {
+    background-color: #800080; /* 마우스 호버시 색상 변경 */
+}

@@ -19,7 +19,16 @@ const quizData = [
         ],
         correctAnswer: "4"
     },
-    // 추가 질문
+    {
+        question: "교육학 퀴즈 질문 3: \n 10 / 2 = ?",
+        options: [
+            "2",
+            "3",
+            "4",
+            "5"
+        ],
+        correctAnswer: "5"
+    }
 ];
 
 let currentQuestion = 0;
@@ -37,6 +46,7 @@ const retryButton = document.getElementById("retry-btn");
 
 function startQuiz() {
     startButton.style.display = "none";
+    quizDescription.style.display = "none";
     document.getElementById("quiz").style.display = "block";
     currentQuestion = 0;
     score = 0;
@@ -44,11 +54,7 @@ function startQuiz() {
     loadQuestion();
 }
 
-startButton.addEventListener("click", function() {
-    quizDescription.style.display = "none";
-    document.getElementById("quiz").style.display = "block";
-    startQuiz();
-});
+startButton.addEventListener("click", startQuiz);
 
 restartButton.addEventListener("click", function() {
     currentQuestion = 0;
@@ -99,12 +105,6 @@ function checkAnswer(selectedOption, optionIndex) {
     }
 
     currentQuestion++;
-
-    if (currentQuestion < quizData.length) {
-        setTimeout(loadQuestion, 1500);
-    } else {
-        setTimeout(showResult, 1500);
-    }
 }
 
 function showAnswerResult(message, color) {
@@ -113,53 +113,42 @@ function showAnswerResult(message, color) {
     quizcontainer.style.backgroundColor = color;
     questionElement.textContent = message;
     questionElement.style.color = "#fff";
-
-    setTimeout(function() {
-        quizcontainer.style.backgroundColor = "#fff";
-        questionElement.style.color = "#333";
-    }, 1500);
+    if (currentQuestion < quizData.length - 1) {
+        const nextQuestionButton = document.createElement("button");
+        nextQuestionButton.textContent = "다음 문제로";
+        nextQuestionButton.classList.add("next-question-btn");
+        nextQuestionButton.addEventListener("click", function() {
+            quizcontainer.style.backgroundColor = "#fff";
+            questionElement.style.color = "#333";
+            loadQuestion();
+        });
+        optionsContainer.appendChild(nextQuestionButton);
+    } else {
+        const showResultButton = document.createElement("button");
+        showResultButton.textContent = "결과 화면 보기";
+        showResultButton.classList.add("show-result-btn");
+        showResultButton.addEventListener("click", function() {
+            quizcontainer.style.backgroundColor = "#fff";
+            questionElement.style.color = "#333";
+            showResult();
+        });
+        optionsContainer.appendChild(showResultButton);
+    }
 }
+
 
 function showResult() {
     questionElement.style.display = "none";
     optionsContainer.style.display = "none";
     const roundedScore = Math.round((score / quizData.length) * 100);
     resultElement.textContent = `당신의 점수는 ${roundedScore}점입니다.`;
-    document.querySelector(".restart-btn").style.display = "inline-block";
+    restartButton.style.display = "inline-block";
     if (score === quizData.length) {
-        document.querySelector(".retry-btn").style.display = "none";
+        retryButton.style.display = "none";
         resultElement.innerHTML += "<p>축하합니다! 모든 정답을 맞추셨습니다!</p>";
     }
     else {
-        document.querySelector(".retry-btn").style.display = "inline-block";
+        retryButton.style.display = "inline-block";
         resultElement.innerHTML += "<p>축하합니다! 퀴즈를 완료하셨습니다!</p>";
     }
 }
-
-let clickCount = 0;
-let lastClickTime = 0;
-
-document.addEventListener('click', function(event) {
-    const currentTime = new Date().getTime();
-    const timeDiff = currentTime - lastClickTime;
-    
-    if (timeDiff < 300) {
-        clickCount++;
-    } else {
-        clickCount = 1;
-    }
-
-    lastClickTime = currentTime;
-
-    if (clickCount === 2) {
-        if (currentQuestion < quizData.length) {
-            quizcontainer.style.backgroundColor = "#fff";
-            questionElement.style.color = "#333";
-            loadQuestion();
-        } else if (currentQuestion === quizData.length) {
-            quizcontainer.style.backgroundColor = "#fff";
-            questionElement.style.color = "#333";
-            showResult();
-        }
-    }
-});

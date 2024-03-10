@@ -10,7 +10,7 @@
     <div class="quiz-header">
         <h1>오성 교육학 퀴즈</h1>
     </div>
-    <div class="quiz-container">
+    <div class="quiz-container disabled">
         <div id="quiz-description" class="quiz-description">이 퀴즈는 교육학 관련된 질문들로 구성되어 있습니다.<br> 시작하기 버튼을 클릭하여 퀴즈를 시작하세요!<br>(정오 확인표에서 더블클릭시 다음문제로)</div>
         <button id="start-btn" class="start-btn">시작하기</button>
         <div id="quiz" class="quiz" style="display: none;">
@@ -18,6 +18,9 @@
             <div id="options" class="options"></div>
         </div>
         <div id="result" class="result"></div>
+        <div id="next-question-container" class="button-group" style="display: none;">
+            <button id="next-question-btn" class="next-question-btn">다음 문제로</button>
+        </div>
         <div class="button-group">
             <button id="restart-btn" class="restart-btn" style="display: none;">처음으로</button>
             <button id="retry-btn" class="retry-btn" style="display: none;">틀린 문제 다시 풀기</button>
