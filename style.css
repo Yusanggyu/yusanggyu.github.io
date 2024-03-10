@@ -20,8 +20,8 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 35%;
-    height: auto; /* 자동 높이 조정 */
+    width: 70%;
+    height: 70%;
     text-align: center;
 }
 
