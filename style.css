@@ -20,10 +20,14 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 70%;
-    height: 70%;
+    width: 90%; /* 너비를 90%로 변경 */
+    max-width: 600px; /* 최대 너비를 600px로 제한 */
+    margin: 0 auto; /* 가운데 정렬 */
     text-align: center;
+    margin-left: 20px; /* 좌측 마진 */
+    margin-right: 20px; /* 우측 마진 */
 }
+
 
 .quiz-description {
     margin-bottom: 20px;
@@ -116,4 +120,8 @@ body {
 .next-question-btn:hover,
 .show-result-btn:hover {
     background-color: #800080; /* 마우스 호버시 색상 변경 */
+}
+
+#question_index {
+    font-weight: bold;
 }

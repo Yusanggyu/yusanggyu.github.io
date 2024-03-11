@@ -1,6 +1,7 @@
 const quizData = [
     {
-        question: "교육학 퀴즈 질문 1: \n 1 + 1 = ?",
+        question_index: "교육학 퀴즈 질문 1.",
+        question: "1 + 1 = ?",
         options: [
             "1",
             "2",
@@ -10,7 +11,8 @@ const quizData = [
         correctAnswer: "2"
     },
     {
-        question: "교육학 퀴즈 질문 2: \n 2 x 2 = ?",
+        question_index: "교육학 퀴즈 질문 2.",
+        question: "2 x 2 = ?",
         options: [
             "1",
             "2",
@@ -20,7 +22,8 @@ const quizData = [
         correctAnswer: "4"
     },
     {
-        question: "교육학 퀴즈 질문 3: \n 10 / 2 = ?",
+        question_index: "교육학 퀴즈 질문 3.",
+        question: "10 / 2 = ?",
         options: [
             "2",
             "3",
@@ -74,7 +77,9 @@ retryButton.addEventListener("click", function() {
 });
 
 function loadQuestion() {
+    document.getElementById("question_index").style.display = "block";
     const currentQuizData = quizData[currentQuestion];
+    document.getElementById("question_index").textContent = currentQuizData.question_index; // 이 부분 추가
     questionElement.textContent = currentQuizData.question;
 
     optionsContainer.innerHTML = "";
@@ -91,7 +96,9 @@ function loadQuestion() {
     });
 }
 
+
 function checkAnswer(selectedOption, optionIndex) {
+    document.getElementById("question_index").style.display = "none"; // 이 부분 추가하여 문제 번호 숨김
     const currentQuizData = quizData[currentQuestion];
     const selectedAnswer = selectedOption.textContent;
 
@@ -138,6 +145,7 @@ function showAnswerResult(message, color) {
 
 
 function showResult() {
+    document.getElementById("question_index").style.display = "none"; // 이 부분 추가하여 문제 번호 숨김
     questionElement.style.display = "none";
     optionsContainer.style.display = "none";
     const roundedScore = Math.round((score / quizData.length) * 100);
@@ -152,3 +160,4 @@ function showResult() {
         resultElement.innerHTML += "<p>축하합니다! 퀴즈를 완료하셨습니다!</p>";
     }
 }
+
