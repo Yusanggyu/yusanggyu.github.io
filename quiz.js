@@ -1,36 +1,36 @@
 const quizData = [
     {
         question_index: "교육학 퀴즈 질문 1.",
-        question: "1 + 1 = ?",
+        question: "다음 입시 제도중 국가에서 주관하는 것은?",
         options: [
-            "1",
-            "2",
-            "3",
-            "4"
+            "대학별 고사",
+            "고교 내신",
+            "대학 수학 능력 시험",
+            "쪽지 시험"
         ],
-        correctAnswer: "2"
+        correctAnswer: "대학 수학 능력 시험"
     },
     {
         question_index: "교육학 퀴즈 질문 2.",
-        question: "2 x 2 = ?",
+        question: "우리나라의 교육 문제점 중 알맞지 않은 것은?",
         options: [
-            "1",
-            "2",
-            "3",
-            "4"
+            "학력 인플레이션",
+            "주입식 교육",
+            "명문 대학 출범",
+            "사교육비 부담"
         ],
-        correctAnswer: "4"
+        correctAnswer: "명문 대학 출범"
     },
     {
         question_index: "교육학 퀴즈 질문 3.",
-        question: "10 / 2 = ?",
+        question: "한국 교육의 문제를 해결하는데에 적절한 방법은?",
         options: [
-            "2",
-            "3",
-            "4",
-            "5"
+            "명문 대학 폐지",
+            "지식 중심 교육",
+            "세계 시민 의식 교육 강화",
+            "고등학교 6학년제 도입"
         ],
-        correctAnswer: "5"
+        correctAnswer: "세계 시민 의식 교육 강화"
     }
 ];
 
