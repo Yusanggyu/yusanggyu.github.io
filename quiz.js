@@ -62,18 +62,11 @@ function startQuiz() {
 startButton.addEventListener("click", startQuiz);
 
 restartButton.addEventListener("click", function() {
-    currentQuestion = 0;
-    score = 0;
-    resultElement.textContent = "";
-    restartButton.style.display = "none";
-    retryButton.style.display = "none";
-    quizDescription.style.display = "block";
-    startButton.style.display = "block";
+    location.reload();
 });
 
 retryButton.addEventListener("click", function() {
-    score = 0;
-    resultElement.textContent = "";
+    resultElement.textContent = "구현 중인 기능입니다.";
     retryButton.style.display = "none";
     loadQuestion();
 });
@@ -104,7 +97,7 @@ function checkAnswer(selectedOption, optionIndex) {
     const selectedAnswer = selectedOption.textContent;
 
     selectedAnswers[currentQuestion] = optionIndex;
-    Answer.add(selectedAnswer); // 선택된 답변을 Set 객체에 추가합니다.
+    Answer.add(selectedAnswer);
     
     if (selectedAnswer === currentQuizData.correctAnswer) {
         score++;
@@ -158,15 +151,15 @@ function showResult() {
     } else {
         let wrongQuestionNumbers = [];
         for (let i = 0; i < quizData.length; i++) {
-            const selectedAnswer = quizData[i].options[selectedAnswers[i]]; // 선택된 답변을 가져오는 변수를 정의합니다.
+            const selectedAnswer = quizData[i].options[selectedAnswers[i]];
             if (selectedAnswers[i] !== null && selectedAnswer != quizData[i].correctAnswer) {
-                wrongQuestionNumbers.push(i + 1);
+                wrongQuestionNumbers.push(i);
             }
         }
         if (wrongQuestionNumbers.length > 0) {
             resultElement.innerHTML += "<p>틀린 문항 번호:</p>";
             wrongQuestionNumbers.forEach(questionNumber => {
-                resultElement.innerHTML += `<p>${questionNumber}. ${quizData[questionNumber].question}</p>`;
+                resultElement.innerHTML += `<p>${questionNumber+1}. ${quizData[questionNumber].question}</p>`;
             });
         } else {
             resultElement.innerHTML += "<p>틀린 문항이 없습니다.</p>";
