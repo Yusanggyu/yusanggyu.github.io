@@ -37,6 +37,7 @@ const quizData = [
 let currentQuestion = 0;
 let score = 0;
 let selectedAnswers = [];
+let Answer = new Set(); // Answer 변수를 Set 객체로 초기화합니다.
 
 const questionElement = document.getElementById("question");
 const optionsContainer = document.getElementById("options");
@@ -54,6 +55,7 @@ function startQuiz() {
     currentQuestion = 0;
     score = 0;
     selectedAnswers = [];
+    Answer.clear(); // Answer를 초기화합니다.
     loadQuestion();
 }
 
@@ -79,7 +81,7 @@ retryButton.addEventListener("click", function() {
 function loadQuestion() {
     document.getElementById("question_index").style.display = "block";
     const currentQuizData = quizData[currentQuestion];
-    document.getElementById("question_index").textContent = currentQuizData.question_index; // 이 부분 추가
+    document.getElementById("question_index").textContent = currentQuizData.question_index;
     questionElement.textContent = currentQuizData.question;
 
     optionsContainer.innerHTML = "";
@@ -96,14 +98,14 @@ function loadQuestion() {
     });
 }
 
-
 function checkAnswer(selectedOption, optionIndex) {
-    document.getElementById("question_index").style.display = "none"; // 이 부분 추가하여 문제 번호 숨김
+    document.getElementById("question_index").style.display = "none";
     const currentQuizData = quizData[currentQuestion];
     const selectedAnswer = selectedOption.textContent;
 
     selectedAnswers[currentQuestion] = optionIndex;
-
+    Answer.add(selectedAnswer); // 선택된 답변을 Set 객체에 추가합니다.
+    
     if (selectedAnswer === currentQuizData.correctAnswer) {
         score++;
         showAnswerResult("정답입니다!", "#4CAF50");
@@ -143,9 +145,8 @@ function showAnswerResult(message, color) {
     }
 }
 
-
 function showResult() {
-    document.getElementById("question_index").style.display = "none"; // 이 부분 추가하여 문제 번호 숨김
+    document.getElementById("question_index").style.display = "none";
     questionElement.style.display = "none";
     optionsContainer.style.display = "none";
     const roundedScore = Math.round((score / quizData.length) * 100);
@@ -154,10 +155,23 @@ function showResult() {
     if (score === quizData.length) {
         retryButton.style.display = "none";
         resultElement.innerHTML += "<p>축하합니다! 모든 정답을 맞추셨습니다!</p>";
-    }
-    else {
+    } else {
+        let wrongQuestionNumbers = [];
+        for (let i = 0; i < quizData.length; i++) {
+            const selectedAnswer = quizData[i].options[selectedAnswers[i]]; // 선택된 답변을 가져오는 변수를 정의합니다.
+            if (selectedAnswers[i] !== null && selectedAnswer != quizData[i].correctAnswer) {
+                wrongQuestionNumbers.push(i + 1);
+            }
+        }
+        if (wrongQuestionNumbers.length > 0) {
+            resultElement.innerHTML += "<p>틀린 문항 번호:</p>";
+            wrongQuestionNumbers.forEach(questionNumber => {
+                resultElement.innerHTML += `<p>${questionNumber}. ${quizData[questionNumber].question}</p>`;
+            });
+        } else {
+            resultElement.innerHTML += "<p>틀린 문항이 없습니다.</p>";
+        }
         retryButton.style.display = "inline-block";
-        resultElement.innerHTML += "<p>축하합니다! 퀴즈를 완료하셨습니다!</p>";
+        resultElement.innerHTML += "<p>틀린 문항을 다시 풀거나 처음부터 시작할 수 있습니다.</p>";
     }
 }
-
