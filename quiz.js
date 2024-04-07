@@ -139,22 +139,26 @@ retryButton.addEventListener("click", function() {
 
 function loadQuestion() {
     document.getElementById("question_index").style.display = "block";
-    const currentQuizData = quizData[currentQuestion];
-    document.getElementById("question_index").textContent = currentQuizData.question_index;
-    questionElement.textContent = currentQuizData.question;
+    if (currentQuestion < quizData.length) {
+        const currentQuizData = quizData[currentQuestion];
+        document.getElementById("question_index").textContent = currentQuizData.question_index;
+        questionElement.textContent = currentQuizData.question;
 
-    optionsContainer.innerHTML = "";
-    selectedAnswers[currentQuestion] = null;
+        optionsContainer.innerHTML = "";
+        selectedAnswers[currentQuestion] = null;
 
-    currentQuizData.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.classList.add("option");
-        button.addEventListener("click", function() {
-            checkAnswer(this, index);
+        currentQuizData.options.forEach((option, index) => {
+            const button = document.createElement("button");
+            button.textContent = option;
+            button.classList.add("option");
+            button.addEventListener("click", function() {
+                checkAnswer(this, index);
+            });
+            optionsContainer.appendChild(button);
         });
-        optionsContainer.appendChild(button);
-    });
+    } else {
+        showResult();
+    }
 }
 
 function checkAnswer(selectedOption, optionIndex) {
