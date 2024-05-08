@@ -185,6 +185,15 @@ function showAnswerResult(message, color) {
     quizcontainer.style.backgroundColor = color;
     questionElement.textContent = message;
     questionElement.style.color = "#fff";
+
+    if (message === "틀렸습니다!") {
+        const currentQuizData = quizData[currentQuestion];
+        const correctAnswerElement = document.createElement("p");
+        correctAnswerElement.textContent = `정답은 "${currentQuizData.correctAnswer}" 입니다.`;
+        correctAnswerElement.style.color = "#fff";
+        optionsContainer.appendChild(correctAnswerElement);
+    }
+    
     if (currentQuestion < quizData.length - 1) {
         const nextQuestionButton = document.createElement("button");
         nextQuestionButton.textContent = "다음 문제로";
